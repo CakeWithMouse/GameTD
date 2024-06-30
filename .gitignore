@@ -1,12 +1,12 @@
 #################################
 # Unreal Engine Generated Files #
 #################################
-/[Bb]uild
-/[Bb]uilds
-/Binaries
-/DerivedDataCache
-/Intermediate
-/Saved
+/UE_project/[Bb]uild
+/UE_project/[Bb]uilds
+/UE_project/Binaries
+/UE_project/DerivedDataCache
+/UE_project/Intermediate
+/UE_project/Saved
 
 #################################
 # Visual Studio Generated Files #
