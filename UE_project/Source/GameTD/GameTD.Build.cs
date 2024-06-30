@@ -1,10 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
 
-public class For_TD : ModuleRules
+public class GameTD : ModuleRules
 {
-	public For_TD(ReadOnlyTargetRules Target) : base(Target)
+	public GameTD(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
