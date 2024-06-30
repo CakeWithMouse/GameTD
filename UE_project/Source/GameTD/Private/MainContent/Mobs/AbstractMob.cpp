@@ -8,7 +8,7 @@ AAbstractMob::AAbstractMob()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	GEngine->AddOnScreenDebugMessage(1,15,FColor::Black,TEXT("HI! I am Base"));
+	//GEngine->AddOnScreenDebugMessage(1,15,FColor::Black,TEXT("HI! I am Base"));
 }
 
 // Called when the game starts or when spawned
