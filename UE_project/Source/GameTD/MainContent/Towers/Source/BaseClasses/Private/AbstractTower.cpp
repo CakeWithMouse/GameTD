@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AbstractTower.h"
+#include "../Public/AbstractTower.h"
 
 // Sets default values
 AAbstractTower::AAbstractTower()
