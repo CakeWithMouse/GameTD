@@ -14,6 +14,7 @@ class GAMETD_API AAbstract_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+
 public:
 	//AAbstract_PlayerController();
 
@@ -30,4 +31,5 @@ protected:
 	virtual void EventLevelUp();
 	virtual void GetWeapon();
 	virtual void DropWeapon();
+
 };
