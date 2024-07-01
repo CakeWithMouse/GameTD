@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AbstractMob.h"
+
+#include "../Public/AbstractMob.h"
 
 // Sets default values
 AAbstractMob::AAbstractMob()
