@@ -21,13 +21,13 @@ public:
 	float PlayerHitPoints;
 	int Money;
 protected:
-	virtual void MoveForward(const float Value);
-	virtual void MoveRight(const float Value);
-	virtual void Jump();
-	virtual void Shoot();
+	virtual void MoveForward(const float Value){};
+	virtual void MoveRight(const float Value){};
+	virtual void Jump(){};
+	virtual void Shoot(){};
 	
-	virtual void EventDie();
-	virtual void EventLevelUp();
-	virtual void GetWeapon();
-	virtual void DropWeapon();
+	virtual void EventDie(){};
+	virtual void EventLevelUp(){};
+	virtual void GetWeapon(){};
+	virtual void DropWeapon(){};
 };
