@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameTD/MainContent/Player_Controller/Source/BaseClasses/Public/PlayerController/Abstract_PlayerController.h"
+#include "Player_Controller/Source/BaseClasses/PlayerController/Abstract_PlayerController.h"
 #include "Base_PlayerController.generated.h"
 
 /**

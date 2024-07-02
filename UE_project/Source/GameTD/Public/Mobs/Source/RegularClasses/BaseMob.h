@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameTD/MainContent/Mobs/Source/BaseClasses/Public/AbstractMob.h"
+#include "Mobs/Source/BaseClasses/AbstractMob.h"
 #include "BaseMob.generated.h"
 
 /**
