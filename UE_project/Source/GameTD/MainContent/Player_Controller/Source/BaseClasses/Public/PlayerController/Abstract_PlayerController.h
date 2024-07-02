@@ -9,13 +9,13 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Abstract)
 class GAMETD_API AAbstract_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
-	//AAbstract_PlayerController();
+	AAbstract_PlayerController(FString Name,float HP,int Money);
 
 	FString PlayerNick;
 	float PlayerHitPoints;

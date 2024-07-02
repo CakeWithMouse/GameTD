@@ -4,3 +4,8 @@
 
 
 
+AAbstract_PlayerController::AAbstract_PlayerController(FString Name,float HP,int StartMoney)
+	:PlayerNick(Name),Money(StartMoney),PlayerHitPoints(HP)
+{
+	
+}
