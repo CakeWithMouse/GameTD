@@ -31,27 +31,27 @@ public:
 	int money;
 protected:
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void MoveForward(float Value);
+	virtual void MoveForward(float Value){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void MoveRight(float Value);
+	virtual void MoveRight(float Value){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void Jump();
+	virtual void Jump(){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void Shoot();
+	virtual void Shoot(){};
 
 	// Player events
 	UFUNCTION(BlueprintCallable, Category="Player Events")
-	virtual void EventDie();
+	virtual void EventDie(){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Events")
-	virtual void EventLevelUp();
+	virtual void EventLevelUp(){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void GetWeapon();
+	virtual void GetWeapon(){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void DropWeapon();
+	virtual void DropWeapon(){};
 };
