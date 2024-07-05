@@ -16,7 +16,7 @@ class GAMETD_API AAbstract_PlayerController : public APlayerController
 
 public:
 	AAbstract_PlayerController()
-		:playerNick(TEXT("DefaultPlayer")),money(0),playerHitPoints(100.0f)
+		:playerNick(TEXT("DefaultPlayer")),money(0),playerHitPoints(100.0f),MoveSpeed(1),Sensitivity(1)
 	{
 		
 	}
@@ -30,11 +30,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player Stats")
 	int money;
 protected:
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
+	float MoveSpeed;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
+	float Sensitivity;
+	
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void MoveForward(float Value){};
+	virtual void Move(FVector2D Value){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void MoveRight(float Value){};
+	virtual void LookAround(FVector2D Value){};
+	
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
 	virtual void Jump(){};
