@@ -31,6 +31,10 @@ void ABase_PlayerController::Move(FVector2D Value)
 		ControlledPawn->AddMovementInput(FVector::RightVector,Value.Y * MoveSpeed);
 	}
 }
+void ABase_PlayerController::Build(float Cost)
+{
+	GEngine->AddOnScreenDebugMessage(54,2,FColor::Emerald,TEXT("Build new Tower"));
+}
 
 void ABase_PlayerController::LookAround(FVector2D Value)
 {
@@ -51,6 +55,24 @@ void ABase_PlayerController::LookAround(FVector2D Value)
 	}
 
 }
+
+void ABase_PlayerController::SetSensetive(float Sensitiv)
+{
+	if(Sensitiv == 0)
+	{
+		return;
+	}
+	this->Sensitivity = Sensitiv;
+}
+void ABase_PlayerController::SetMovementSpeed(float Speed)
+{
+	if(Speed == 0)
+	{
+		return;
+	}
+	this->MoveSpeed = Speed;
+}
+
 
 void ABase_PlayerController::Jump()
 {

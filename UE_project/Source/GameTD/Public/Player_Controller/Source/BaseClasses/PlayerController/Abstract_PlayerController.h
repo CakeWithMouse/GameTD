@@ -49,6 +49,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
 	virtual void Shoot(){};
 
+	UFUNCTION(BlueprintCallable, Category="Player Actions")
+	virtual void Build(float Cost){};
+
 	// Player events
 	UFUNCTION(BlueprintCallable, Category="Player Events")
 	virtual void EventDie(){};
@@ -61,4 +64,10 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
 	virtual void DropWeapon(){};
+
+	UFUNCTION(BlueprintCallable, Category="Player Settings")
+	virtual void SetSensetive(float Sensitiv){};
+	
+	UFUNCTION(BlueprintCallable, Category="Player Settings")
+	virtual void SetMovementSpeed(float Speed){};
 };
