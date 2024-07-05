@@ -20,16 +20,19 @@ void ABase_PlayerController::Move(FVector2D Value)
 	{
 		return;
 	}
+	FVector ViewLocation;
+	FRotator ViewRotation;
 
-	if(Value.X != 0.0f)
-	{
-		ControlledPawn->AddMovementInput(FVector::ForwardVector,Value.X * MoveSpeed);
-	}
+	GetPlayerViewPoint(ViewLocation,ViewRotation);
 
-	if(Value.Y != 0.0f)
-	{
-		ControlledPawn->AddMovementInput(FVector::RightVector,Value.Y * MoveSpeed);
-	}
+	const FVector ForwardVector = ViewRotation.Vector();
+	const FVector RightVector = FRotationMatrix(ViewRotation).GetScaledAxis(EAxis::Y);
+
+	FVector Buffer = ForwardVector * Value.X + RightVector * Value.Y;
+	Buffer.Z = 0;
+	const FVector NewDirection = (Buffer).GetSafeNormal();
+	
+	ControlledPawn->AddMovementInput(NewDirection,1.0f);
 }
 void ABase_PlayerController::Build(float Cost)
 {
