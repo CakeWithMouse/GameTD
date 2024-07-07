@@ -24,8 +24,7 @@
 *.opendb
 *.opensdf
 *.sdf
-# Solution Files
-*.sln
+*.sin
 # VSCode Cache Directory
 .vscode
 # VSCode History Files
