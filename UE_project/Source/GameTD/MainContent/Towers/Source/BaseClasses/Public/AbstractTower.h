@@ -6,7 +6,13 @@
 #include "GameFramework/Actor.h"
 #include <Components/TextRenderComponent.h>
 #include "Components/InstancedStaticMeshComponent.h"
+#include "Components/SphereComponent.h"
+#include "GameFramework/Pawn.h"
+#include "Engine/Font.h" 
+
+#include "../Public/AbstractProjectile.h"
 #include "AbstractTower.generated.h"
+
 
 UCLASS()
 class AAbstractTower : public AActor
@@ -16,30 +22,49 @@ class AAbstractTower : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AAbstractTower();
-	AAbstractTower(FString name, FString type, double DPS, double attackSpeed);
+	AAbstractTower(FString name, FString type, float DPS, float attackSpeed);
+	void OnConstruction();
 
 protected:
-	double attackRange_;
-	double attackSpeed_;
-	double DPS_;
-	double moneyCost_;
+	float attackRadius_;
+	float attackSpeed_;
+	float DPS_;
+	float moneyCost_;
+	float timer_;
 	FString statusEffect_;
 	FString name_;
 	FString type_;
+	
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
+	void setAttackRange(float newAttackRange);
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void printTargetsQueue();
+	void attackEnemy(FVector sendActor, FVector recieveActor);
+
+	UFUNCTION()
+	void OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) ;
+	UFUNCTION()
+	void OnEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UPROPERTY()
 	//UMaterial baseMaterial;
-	USceneComponent* Root;
-	UTextRenderComponent* infoText;
+	USceneComponent* root_;
+
+	AActor* activeTarget_;
+	TArray<AActor*> targetsQueue_;
+
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* baseMesh;
+	UTextRenderComponent* infoText_;
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* baseMesh_;
+	UPROPERTY(EditAnywhere)
+	USphereComponent* attackRadiusCollision_;
 };
+
+
