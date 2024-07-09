@@ -14,6 +14,7 @@ class AAbstractWeapon : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AAbstractWeapon();
+	virtual void DoShoot(){};
 
 protected:
 	// Called when the game starts or when spawned
