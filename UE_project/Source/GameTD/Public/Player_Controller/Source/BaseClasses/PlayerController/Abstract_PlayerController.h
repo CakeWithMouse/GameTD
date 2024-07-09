@@ -16,31 +16,41 @@ class GAMETD_API AAbstract_PlayerController : public APlayerController
 
 public:
 	AAbstract_PlayerController()
-		:playerNick(TEXT("DefaultPlayer")),money(0),playerHitPoints(100.0f)
+		:PlayerNick(TEXT("DefaultPlayer")),Money(0),PlayerHitPoints(100.0f),MoveSpeed(1),Sensitivity(1)
 	{
 		
 	}
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player Stats")
-	FString playerNick;
+	FString PlayerNick;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player Stats")
-	float playerHitPoints;
+	float PayerHitPoints;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player Stats")
-	int money;
+	int Money;
 protected:
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
+	float MoveSpeed;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
+	float Sensitivity;
+	
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void MoveForward(float Value){};
+	virtual void Move(FVector2D Value){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
-	virtual void MoveRight(float Value){};
+	virtual void LookAround(FVector2D Value){};
+	
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
 	virtual void Jump(){};
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
 	virtual void Shoot(){};
+
+	UFUNCTION(BlueprintCallable, Category="Player Actions")
+	virtual void Build(float Cost){};
 
 	// Player events
 	UFUNCTION(BlueprintCallable, Category="Player Events")
@@ -54,4 +64,10 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category="Player Actions")
 	virtual void DropWeapon(){};
+
+	UFUNCTION(BlueprintCallable, Category="Player Settings")
+	virtual void SetSensetive(float Sensitiv){};
+	
+	UFUNCTION(BlueprintCallable, Category="Player Settings")
+	virtual void SetMovementSpeed(float Speed){};
 };
