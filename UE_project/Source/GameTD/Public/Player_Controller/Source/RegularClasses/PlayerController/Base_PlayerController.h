@@ -17,9 +17,11 @@ class ABase_PlayerController : public AAbstract_PlayerController
 
 public:
 	void OnConstruction(const FTransform& Transform) override;
+
 private:
 	void SetSensetive(float Sensitiv) override;
 	void SetMovementSpeed(float Speed) override;
+
 public:
 	//ABase_PlayerController(FString Name,float HP,int Money);
 	ABase_PlayerController();
@@ -32,7 +34,7 @@ public:
 	void LookAround(FVector2D Value) override;
 
 	void Build(float Cost) override;
-	
+
 	void Jump() override;
 
 	void Shoot() override;

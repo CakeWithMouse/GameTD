@@ -16,19 +16,19 @@ class GAMETD_API AAbstract_PlayerController : public APlayerController
 
 public:
 	AAbstract_PlayerController()
-		:playerNick(TEXT("DefaultPlayer")),money(0),playerHitPoints(100.0f),MoveSpeed(1),Sensitivity(1)
+		:PlayerNick(TEXT("DefaultPlayer")),Money(0),PlayerHitPoints(100.0f),MoveSpeed(1),Sensitivity(1)
 	{
 		
 	}
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player Stats")
-	FString playerNick;
+	FString PlayerNick;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player Stats")
-	float playerHitPoints;
+	float PayerHitPoints;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player Stats")
-	int money;
+	int Money;
 protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
 	float MoveSpeed;
