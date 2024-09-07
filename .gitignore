@@ -31,9 +31,9 @@
 **/.history
 
 #Ignore DevelopersContent and External Content
-Content/Developers*
-Content/__ExternalActors__*
-Content/__ExternalObjects__*
+/UE_project/Content/Developers*
+/UE_project/Content/__ExternalActors__*
+/UE_project/Content/__ExternalObjects__*
 
 #################################
 # Miscellaneous Generated Files #
