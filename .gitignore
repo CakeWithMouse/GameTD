@@ -30,6 +30,11 @@
 # VSCode History Files
 **/.history
 
+#Ignore DevelopersContent and External Content
+Content/Developers*
+Content/__ExternalActors__*
+Content/__ExternalObjects__*
+
 #################################
 # Miscellaneous Generated Files #
 #################################

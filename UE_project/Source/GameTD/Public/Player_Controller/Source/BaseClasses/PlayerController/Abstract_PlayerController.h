@@ -16,7 +16,6 @@ class GAMETD_API AAbstract_PlayerController : public APlayerController
 
 public:
 	AAbstract_PlayerController()
-		:PlayerNick(TEXT("DefaultPlayer")),Money(0),PlayerHitPoints(100.0f),MoveSpeed(1),Sensitivity(1)
 	{
 		
 	}
