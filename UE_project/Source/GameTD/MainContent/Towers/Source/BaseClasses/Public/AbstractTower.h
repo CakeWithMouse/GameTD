@@ -26,25 +26,25 @@ public:
 	void OnConstruction();
 
 protected:
-	float attackRadius_;
-	float attackSpeed_;
-	float DPS_;
-	float moneyCost_;
-	float timer_;
-	FString statusEffect_;
-	FString name_;
-	FString type_;
+	float AttackRadius;
+	float AttackSpeed;
+	float DamagePerSecond;
+	float MoneyCost;
+	float Timer;
+	FString StatusEffect;
+	FString Name;
+	FString Type;
 	
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	void setAttackRange(float newAttackRange);
+	void SetAttackRange(float newAttackRange);
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void printTargetsQueue();
-	void attackEnemy(FVector sendActor, FVector recieveActor);
+	void PrintTargetsQueue();
+	void AttackEnemy(FVector sendActor, FVector recieveActor);
 
 	UFUNCTION()
 	void OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) ;
@@ -53,18 +53,18 @@ public:
 
 	UPROPERTY()
 	//UMaterial baseMaterial;
-	USceneComponent* root_;
+	USceneComponent* Root;
 
-	AActor* activeTarget_;
-	TArray<AActor*> targetsQueue_;
+	AActor* ActiveTarget;
+	TArray<AActor*> TargetsQueue;
 
 
 	UPROPERTY(EditAnywhere)
-	UTextRenderComponent* infoText_;
+	UTextRenderComponent* InfoText;
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* baseMesh_;
+	UStaticMeshComponent* BaseMesh;
 	UPROPERTY(EditAnywhere)
-	USphereComponent* attackRadiusCollision_;
+	USphereComponent* AttackRadiusCollision;
 };
 
 

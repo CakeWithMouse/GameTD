@@ -10,70 +10,70 @@ AAbstractTower::AAbstractTower() {
 	PrimaryActorTick.bCanEverTick = true;
 
 	//Default settings
-	attackRadius_ = 100.0f;
-	name_ = "Sample";
-	type_ = "Range";
-	DPS_ = 100.00f;
-	attackSpeed_ = 20.00f;
-	timer_ = 0.0f;
-	activeTarget_ = nullptr;
+	AttackRadius = 100.0f;
+	Name = "Sample";
+	Type = "Range";
+	DamagePerSecond = 100.00f;
+	AttackSpeed = 20.00f;
+	Timer = 0.0f;
+	ActiveTarget = nullptr;
 
 
-	root_ = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	RootComponent = root_;
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = Root;
 
-	baseMesh_ = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	baseMesh_->SetupAttachment(root_);
+	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	BaseMesh->SetupAttachment(Root);
 
-	infoText_ = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Info Text"));
-	infoText_->SetTextRenderColor(FColor::Black);
-	infoText_->SetHorizontalAlignment(EHTA_Center);
-	infoText_->SetVerticalAlignment(EVRTA_TextTop);
-	infoText_->WorldSize *= 0.5;
+	InfoText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Info Text"));
+	InfoText->SetTextRenderColor(FColor::Black);
+	InfoText->SetHorizontalAlignment(EHTA_Center);
+	InfoText->SetVerticalAlignment(EVRTA_TextTop);
+	InfoText->WorldSize *= 0.5;
 
-	FString text = FString::Printf(TEXT("Name: %s\nType: %s\nDPS: %.1f\nAPS: %.1f"), *name_, *type_, DPS_, attackSpeed_);
-	infoText_->SetText(FText::FromString(text));
+	FString text = FString::Printf(TEXT("Name: %s\nType: %s\nDPS: %.1f\nAPS: %.1f"), *Name, *Type, DamagePerSecond, AttackSpeed);
+	InfoText->SetText(FText::FromString(text));
 
-	FVector TextOffset(0.0f, 0.0f, baseMesh_->Bounds.BoxExtent.Z + 140.0f);
-	infoText_->AddRelativeLocation(TextOffset);
-	infoText_->SetupAttachment(baseMesh_);
-
-
-	attackRadiusCollision_ = CreateDefaultSubobject<USphereComponent>(TEXT("Attack radius"));
-	attackRadiusCollision_->SetupAttachment(baseMesh_);
-	attackRadiusCollision_->SetSphereRadius(attackRadius_);
+	FVector TextOffset(0.0f, 0.0f, BaseMesh->Bounds.BoxExtent.Z + 140.0f);
+	InfoText->AddRelativeLocation(TextOffset);
+	InfoText->SetupAttachment(BaseMesh);
 
 
-	attackRadiusCollision_->OnComponentBeginOverlap.AddDynamic(this, &AAbstractTower::OnBeginOverlap);
-	attackRadiusCollision_->OnComponentEndOverlap.AddDynamic(this, &AAbstractTower::OnEndOverlap);
+	AttackRadiusCollision = CreateDefaultSubobject<USphereComponent>(TEXT("Attack radius"));
+	AttackRadiusCollision->SetupAttachment(BaseMesh);
+	AttackRadiusCollision->SetSphereRadius(AttackRadius);
+
+
+	AttackRadiusCollision->OnComponentBeginOverlap.AddDynamic(this, &AAbstractTower::OnBeginOverlap);
+	AttackRadiusCollision->OnComponentEndOverlap.AddDynamic(this, &AAbstractTower::OnEndOverlap);
 
 };
 
-AAbstractTower::AAbstractTower(FString name, FString type, float DPS, float attackSpeed) : name_(name), type_(type), DPS_(DPS), attackSpeed_(attackSpeed)
+AAbstractTower::AAbstractTower(FString name, FString type, float DPS, float attackSpeed) : Name(name), Type(type), DamagePerSecond(DPS), AttackSpeed(attackSpeed)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 
-	root_ = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	RootComponent = root_;
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = Root;
 
-	baseMesh_ = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	baseMesh_->SetupAttachment(root_);
+	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	BaseMesh->SetupAttachment(Root);
 
-	infoText_ = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Info Text"));
-	infoText_->SetTextRenderColor(FColor::Black);
-	infoText_->SetHorizontalAlignment(EHTA_Center);
-	infoText_->SetVerticalAlignment(EVRTA_TextTop);
+	InfoText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Info Text"));
+	InfoText->SetTextRenderColor(FColor::Black);
+	InfoText->SetHorizontalAlignment(EHTA_Center);
+	InfoText->SetVerticalAlignment(EVRTA_TextTop);
 	
 
 	FString text = FString::Printf(TEXT("Name: %s\nType: %s\nDPS: %.1f\nAPS: %.1f"), *name, *type, DPS, attackSpeed);
-	infoText_->SetText(FText::FromString(text));
+	InfoText->SetText(FText::FromString(text));
 
-	FVector TextOffset(0.0f, 0.0f, baseMesh_->Bounds.BoxExtent.Z + 130.0f);
-	infoText_->AddRelativeLocation(TextOffset);
+	FVector TextOffset(0.0f, 0.0f, BaseMesh->Bounds.BoxExtent.Z + 130.0f);
+	InfoText->AddRelativeLocation(TextOffset);
 
-	infoText_->SetupAttachment(baseMesh_);
+	InfoText->SetupAttachment(BaseMesh);
 
 }
 
@@ -81,14 +81,14 @@ void AAbstractTower::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor*
 {
 	if (OtherActor != this && OtherActor->IsA<APawn>())
 	{
-		if (!targetsQueue_.Contains(OtherActor))
+		if (!TargetsQueue.Contains(OtherActor))
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Pawn in radius"));
-			targetsQueue_.Add(OtherActor);
-			printTargetsQueue();
-			if (!activeTarget_)
+			TargetsQueue.Add(OtherActor);
+			PrintTargetsQueue();
+			if (!ActiveTarget)
 			{
-				activeTarget_ = OtherActor;
+				ActiveTarget = OtherActor;
 			}
 		}
 	}
@@ -98,43 +98,43 @@ void AAbstractTower::OnEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* O
 {
 	if (OtherActor != this && OtherActor->IsA<APawn>())
 	{
-		targetsQueue_.Remove(OtherActor);
-		printTargetsQueue();
-		if (activeTarget_ == OtherActor)
+		TargetsQueue.Remove(OtherActor);
+		PrintTargetsQueue();
+		if (ActiveTarget == OtherActor)
 		{
-			if (targetsQueue_.Num() > 0)
+			if (TargetsQueue.Num() > 0)
 			{
-				activeTarget_ = targetsQueue_[0];
+				ActiveTarget = TargetsQueue[0];
 			}
 			else
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Pawn out of radius"));
-				activeTarget_ = nullptr;
+				ActiveTarget = nullptr;
 			}
 		}
 	}
 }
 
-void AAbstractTower::printTargetsQueue()
+void AAbstractTower::PrintTargetsQueue()
 {
 	// Вывод содержимого targetsQueue_
-	FString queueString = TEXT("Targets Queue: ");
-	for (AActor* target : targetsQueue_)
+	FString QueueString = TEXT("Targets Queue: ");
+	for (AActor* target : TargetsQueue)
 	{
-		queueString += target->GetName() + TEXT(",\n");
+		QueueString += target->GetName() + TEXT(",\n");
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, queueString);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, QueueString);
 }
 
-void AAbstractTower::attackEnemy(FVector sendActor, FVector recieveActor){
+void AAbstractTower::AttackEnemy(FVector sendActor, FVector recieveActor){
 	UWorld* World = GetWorld();
 	AAbstractProjectile* projectile = World->SpawnActor<AAbstractProjectile>(AAbstractProjectile::StaticClass(), sendActor, FRotator::ZeroRotator);
 
 	if (projectile)
 	{
-		projectile->currentPosition_ = sendActor;
+		projectile->CurrentPosition = sendActor;
 		//projectile->endPosition_ = recieveActor;
-		projectile->targetActor_ = activeTarget_;
+		projectile->TargetActor = ActiveTarget;
 	}
 }
 
@@ -149,27 +149,27 @@ void AAbstractTower::BeginPlay()
 	
 }
 
-void AAbstractTower::setAttackRange(float newAttackRange){
-	attackRadius_ = newAttackRange;
-	attackRadiusCollision_->SetSphereRadius(attackRadius_);
+void AAbstractTower::SetAttackRange(float newAttackRange){
+	AttackRadius = newAttackRange;
+	AttackRadiusCollision->SetSphereRadius(AttackRadius);
 }
 
 // Called every frame
 void AAbstractTower::Tick(float DeltaTime)
 {
 	
-	timer_ += DeltaTime;
+	Timer += DeltaTime;
 
 	Super::Tick(DeltaTime);
 
 
-	if (timer_ >= 60 / attackSpeed_) {
-		if (activeTarget_) {
+	if (Timer >= 60 / AttackSpeed) {
+		if (ActiveTarget) {
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Attack"));
-			attackEnemy(baseMesh_->GetComponentLocation(), activeTarget_->GetActorLocation());
+			AttackEnemy(BaseMesh->GetComponentLocation(), ActiveTarget->GetActorLocation());
 		}
 		
-		timer_ = 0;
+		Timer = 0;
 	}
 
 }

@@ -8,18 +8,18 @@
 AAbstractProjectile::AAbstractProjectile() {
 	PrimaryActorTick.bCanEverTick = true;
 
-	root_ = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	RootComponent = root_;
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = Root;
 
-	baseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseMesh"));
-	baseMesh->SetStaticMesh(FindObject<UStaticMesh>(ANY_PACKAGE, TEXT("Sphere")));
-	baseMesh->SetRelativeScale3D(FVector(0.05, 0.05, 0.05));
-	baseMesh->SetupAttachment(root_);
+	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseMesh"));
+	BaseMesh->SetStaticMesh(FindObject<UStaticMesh>(ANY_PACKAGE, TEXT("Sphere")));
+	BaseMesh->SetRelativeScale3D(FVector(0.05, 0.05, 0.05));
+	BaseMesh->SetupAttachment(Root);
 
 	/*currentPosition_ = senderPosition_;
 	endPosition_ = recieveActor_;*/
 
-	timer_ = 0.0f;
+	Timer = 0.0f;
 };
 
 AAbstractProjectile::AAbstractProjectile(FVector startCoord, FVector endCoord)
@@ -27,16 +27,16 @@ AAbstractProjectile::AAbstractProjectile(FVector startCoord, FVector endCoord)
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	root_ = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-	RootComponent = root_;
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = Root;
 
-	baseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseMesh"));
-	baseMesh->SetStaticMesh(FindObject<UStaticMesh>(ANY_PACKAGE, TEXT("Sphere")));
-	baseMesh->SetupAttachment(root_);
+	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseMesh"));
+	BaseMesh->SetStaticMesh(FindObject<UStaticMesh>(ANY_PACKAGE, TEXT("Sphere")));
+	BaseMesh->SetupAttachment(Root);
 
 	/*currentPosition_ = startCoord;
 	endPosition_ = endCoord;*/
-	timer_ = 0.0f;
+	Timer = 0.0f;
 }
 
 // Called when the game starts or when spawned
@@ -50,46 +50,46 @@ void AAbstractProjectile::BeginPlay()
 void AAbstractProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	endPosition_ = targetActor_->GetActorLocation();
+	EndPosition = TargetActor->GetActorLocation();
 
-	timer_ += DeltaTime;
-	if (timer_ >= 0.0f) {
+	Timer += DeltaTime;
+	if (Timer >= 0.0f) {
 		//todo: Построить кривую движения
 
-		if (currentPosition_.X == endPosition_.X && currentPosition_.Y == endPosition_.Y && currentPosition_.Z == endPosition_.Z) {
+		if (CurrentPosition.X == EndPosition.X && CurrentPosition.Y == EndPosition.Y && CurrentPosition.Z == EndPosition.Z) {
 			this->Destroy();
 		}
 
-		if (currentPosition_.X != endPosition_.X) {
-			if (currentPosition_.X < endPosition_.X) {
-				currentPosition_.X++;
+		if (CurrentPosition.X != EndPosition.X) {
+			if (CurrentPosition.X < EndPosition.X) {
+				++CurrentPosition.X;
 			}
 			else {
-				currentPosition_.X--;
+				--CurrentPosition.X;
 			}
 		}
 		
-		if (currentPosition_.Y != endPosition_.Y) {
-			if (currentPosition_.Y < endPosition_.Y) {
-				currentPosition_.Y++;
+		if (CurrentPosition.Y != EndPosition.Y) {
+			if (CurrentPosition.Y < EndPosition.Y) {
+				++CurrentPosition.Y;
 			}
 			else {
-				currentPosition_.Y--;
+				--CurrentPosition.Y;
 			}
 		}
 
-		if (currentPosition_.Z != endPosition_.Z) {
-			if (currentPosition_.Z < endPosition_.Z) {
-				currentPosition_.Z++;
+		if (CurrentPosition.Z != EndPosition.Z) {
+			if (CurrentPosition.Z < EndPosition.Z) {
+				++CurrentPosition.Z;
 			}
 			else {
-				currentPosition_.Z--;
+				--CurrentPosition.Z;
 			}
 		}
 		
-		root_->SetRelativeLocation(currentPosition_);
+		Root->SetRelativeLocation(CurrentPosition);
 		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::Printf(TEXT("X Coord: %f"), currentPosition_.X));
-		timer_ = 0;
+		Timer = 0;
 	}
 
 

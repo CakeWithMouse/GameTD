@@ -16,21 +16,21 @@ class GAMETD_API AAbstractProjectile : public AActor
 	
 public:	
 	UPROPERTY()
-	USceneComponent* root_;
+	USceneComponent* Root;
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* baseMesh;
+	UStaticMeshComponent* BaseMesh;
 
 
-	FVector currentPosition_;
-	FVector endPosition_;
-	AActor* targetActor_;
+	FVector CurrentPosition;
+	FVector EndPosition;
+	AActor* TargetActor;
 	// Sets default values for this actor's properties
 	AAbstractProjectile();
-	AAbstractProjectile(FVector startCoord, FVector endCoord);
+	AAbstractProjectile(FVector StartCoord, FVector EndCoord);
 
 
 protected:
-	float timer_;
+	float Timer;
 	
 
 	// Called when the game starts or when spawned
