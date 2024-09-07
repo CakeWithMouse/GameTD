@@ -7,6 +7,9 @@
 /UE_project/DerivedDataCache
 /UE_project/Intermediate
 /UE_project/Saved
+/UE_project/Content/__ExternalActors__
+/UE_project/Content/__ExternalObjects__ 
+/UE_project/Content/Developers
 
 #################################
 # Visual Studio Generated Files #
