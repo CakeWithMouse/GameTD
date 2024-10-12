@@ -34,6 +34,11 @@
 # VSCode History Files
 **/.history
 
+#Ignore DevelopersContent and External Content
+/UE_project/Content/Developers*
+/UE_project/Content/__ExternalActors__*
+/UE_project/Content/__ExternalObjects__*
+
 #################################
 # Miscellaneous Generated Files #
 #################################
