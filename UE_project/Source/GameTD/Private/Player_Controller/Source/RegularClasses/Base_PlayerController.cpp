@@ -7,12 +7,6 @@ void ABase_PlayerController::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 }
-
-ABase_PlayerController::ABase_PlayerController()
-	: ::AAbstract_PlayerController(), CharacterType(TEXT("Name"))
-{
-	//'Weapon = NewObject<ABaseWeapon>();
-}
 void ABase_PlayerController::Move(FVector2D Value)
 {
 	APawn* ControlledPawn = GetPawn();
@@ -49,24 +43,21 @@ void ABase_PlayerController::LookAround(FVector2D Value)
 
 	if(Value.X != 0.0f)
 	{
-		ControlledPawn->AddControllerYawInput(Value.X * Sensitivity);
+		ControlledPawn->AddControllerYawInput(Value.X * GetMouseSensitivity());
 	}
 
 	if(Value.Y != 0.0f)
 	{
-		ControlledPawn->AddControllerPitchInput(Value.Y * Sensitivity);
+		ControlledPawn->AddControllerPitchInput(Value.Y * GetMouseSensitivity());
 	}
 
 }
 
-void ABase_PlayerController::SetSensetive(float Sensitiv)
+void ABase_PlayerController::LookUp(FVector2D Value)
 {
-	if(Sensitiv == 0)
-	{
-		return;
-	}
-	this->Sensitivity = Sensitiv;
+	Super::LookUp(Value);
 }
+
 void ABase_PlayerController::SetMovementSpeed(float Speed)
 {
 	if(Speed == 0)
@@ -74,6 +65,21 @@ void ABase_PlayerController::SetMovementSpeed(float Speed)
 		return;
 	}
 	this->MoveSpeed = Speed;
+}
+
+float ABase_PlayerController::GetMoveSpeed()
+{
+	return this->MoveSpeed;
+}
+
+void ABase_PlayerController::SetMouseSensitivity(float NewSensitivity)
+{
+	this->Sensitivity = NewSensitivity;
+}
+
+float ABase_PlayerController::GetMouseSensitivity()
+{
+	return this->Sensitivity;
 }
 
 
